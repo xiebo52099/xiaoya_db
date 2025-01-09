@@ -95,10 +95,10 @@ if [ "${IMG_VOLUME}" == "true" ]; then
     mount_img
 fi
 
-TWELVE_HOURS=$((12 * 60 * 60))
+TWELVE_HOURS=$((6 * 60 * 60))
 
 if [ "$CYCLE" -lt "$TWELVE_HOURS" ]; then
-    WARN "您设置的循环时间小于12h，对于服务器压力过大，同步下载将不会运行！"
+    WARN "您设置的循环时间小于6h，对于服务器压力过大，同步下载将不会运行！"
     tail -f /dev/null
 else
     while true; do
