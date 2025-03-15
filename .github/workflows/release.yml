@@ -102,6 +102,7 @@ jobs:
       - 
         name: Pyinstaller
         run: |
+            copy .\pkg\solid.spec solid.spec
             pyinstaller solid.spec
         shell: pwsh
 
@@ -111,6 +112,62 @@ jobs:
         with:
             name: solid-windows-amd64
             path: dist/solid.exe
+
+  Linux-glibc-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: ["amd64", "arm64"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set Up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set Up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Package through pyinstaller
+        run: |
+          mkdir rootfs
+          docker buildx build --platform linux/${{ matrix.arch }} --file ./pkg/builder/Dockerfile --output type=local,dest=./rootfs .
+          cp ./rootfs/solid ./solid-linux-${{ matrix.arch }}
+        shell: pwsh
+
+      - name: Upload linux file
+        uses: actions/upload-artifact@v4
+        with:
+          name: solid-linux-${{ matrix.arch }}
+          path: solid-linux-${{ matrix.arch }}
+
+  Linux-musl-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: ["amd64", "arm64"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set Up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set Up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Package through pyinstaller
+        run: |
+          mkdir rootfs
+          docker buildx build --platform linux/${{ matrix.arch }} --file ./pkg/builder/alpine.Dockerfile --output type=local,dest=./rootfs .
+          cp ./rootfs/solid ./solid-linux-musl-${{ matrix.arch }}
+        shell: pwsh
+
+      - name: Upload linux file
+        uses: actions/upload-artifact@v4
+        with:
+          name: solid-linux-musl-${{ matrix.arch }}
+          path: solid-linux-musl-${{ matrix.arch }}
 
   release:
     runs-on: ubuntu-latest
@@ -135,7 +192,12 @@ jobs:
         name: Rename
         shell: bash
         run: |
-            mv ./solid-windows-amd64/solid.exe ./solid-windows-amd64.exe
+            mkdir ./release
+            mv ./solid-windows-amd64/solid.exe ./release/solid-windows-amd64.exe
+            mv ./solid-linux-amd64/solid-linux-amd64 ./release
+            mv ./solid-linux-arm64/solid-linux-arm64 ./release
+            mv ./solid-linux-musl-amd64/solid-linux-amd64 ./release
+            mv ./solid-linux-musl-arm64/solid-linux-arm64 ./release
 
       -
         name: Release
@@ -144,4 +206,4 @@ jobs:
             name: v${{ env.VERSION }}
             tag_name: ${{ env.VERSION }}
             files: |
-                ./solid-windows-amd64.exe
+                ./release
