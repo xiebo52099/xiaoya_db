@@ -28,7 +28,7 @@ RUN set -ex && \
         /root/.cache \
         /tmp/*
 
-COPY --chmod=755 entrypoint.sh /entrypoint.sh
+COPY --chmod=755 ./pkg/docker/entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["tini", "-g", "--", "/entrypoint.sh"]
 

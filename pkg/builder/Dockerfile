@@ -1,5 +1,7 @@
 FROM python:3.13-bullseye AS builder
 
+WORKDIR /builder
+
 RUN python -m pip install --upgrade pip setuptools
 RUN pip install wheel cython pyinstaller
 COPY . .
@@ -9,4 +11,4 @@ RUN pyinstaller solid.spec
 
 FROM scratch
 
-COPY --from=Builder /builder/dist/solid /solid
+COPY --from=builder /builder/dist/solid /solid

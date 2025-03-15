@@ -2,7 +2,7 @@ FROM python:3.13-alpine3.21 AS builder
 
 WORKDIR /builder
 
-RUN apk add build-base git libxslt-dev libxml2-dev musl-dev gcc libffi-dev
+RUN apk add build-base git libxslt-dev libxml2-dev musl-dev gcc g++ libffi-dev
 RUN pip install --upgrade pip setuptools
 RUN pip install wheel cython pyinstaller
 COPY . .
@@ -12,4 +12,4 @@ RUN pyinstaller solid.spec
 
 FROM scratch
 
-COPY --from=Builder /builder/dist/solid /solid
+COPY --from=builder /builder/dist/solid /solid

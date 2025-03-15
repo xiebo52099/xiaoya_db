@@ -40,7 +40,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
+          file: ./pkg/docker/Dockerfile
           platforms: |
             linux/amd64
             linux/arm64/v8
