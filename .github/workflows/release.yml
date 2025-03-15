@@ -196,8 +196,8 @@ jobs:
             mv ./solid-windows-amd64/solid.exe ./release/solid-windows-amd64.exe
             mv ./solid-linux-amd64/solid-linux-amd64 ./release
             mv ./solid-linux-arm64/solid-linux-arm64 ./release
-            mv ./solid-linux-musl-amd64/solid-linux-amd64 ./release
-            mv ./solid-linux-musl-arm64/solid-linux-arm64 ./release
+            mv ./solid-linux-musl-amd64/solid-linux-musl-amd64 ./release
+            mv ./solid-linux-musl-arm64/solid-linux-musl-arm64 ./release
 
       -
         name: Release
@@ -206,4 +206,8 @@ jobs:
             name: v${{ env.VERSION }}
             tag_name: ${{ env.VERSION }}
             files: |
-                ./release
+                ./release/solid-windows-amd64.exe
+                ./release/solid-linux-amd64
+                ./release/solid-linux-arm64
+                ./release/solid-linux-musl-amd64
+                ./release/solid-linux-musl-arm64
