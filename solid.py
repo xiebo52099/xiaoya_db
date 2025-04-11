@@ -32,11 +32,7 @@ logging.getLogger("chardet.charsetprober").disabled = True
 
 
 s_paths_all = [
-    quote("测试/"),  # 8192
-    quote("json/"),  # 4096
-    quote("ISO/"),  # 2048
-    quote("115/"),  # 1024
-    quote("PikPak/"),  # 512
+    quote("测试/"),  # 512
     quote("动漫/"),  # 256
     quote("每日更新/"),  # 128
     quote("电影/"),  # 64
@@ -49,7 +45,6 @@ s_paths_all = [
 ]
 
 t_paths = [
-    quote("115/"),
     quote("每日更新/"),
     quote("纪录片（已刮削）/"),
     quote("音乐/"),
@@ -57,7 +52,6 @@ t_paths = [
 ]
 
 s_paths = [
-    quote("115/"),
     quote("每日更新/"),
     quote("纪录片（已刮削）/"),
     quote("音乐/"),
@@ -606,7 +600,7 @@ async def main():
     args = parser.parse_args()
     if args.debug:
         logging.getLogger("emd").setLevel(logging.DEBUG)
-    logging.info("*** xiaoya_emd version 1.6.12 ***")
+    logging.info("*** xiaoya_emd version 1.6.13 ***")
     paths = []
     if args.all:
         paths = s_paths_all
