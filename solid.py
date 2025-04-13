@@ -45,6 +45,7 @@ s_paths_all = [
 ]
 
 t_paths = [
+    quote("115/"),
     quote("每日更新/"),
     quote("纪录片（已刮削）/"),
     quote("音乐/"),
@@ -54,8 +55,6 @@ t_paths = [
 s_paths = [
     quote("每日更新/"),
     quote("纪录片（已刮削）/"),
-    quote("音乐/"),
-    quote("综艺/"),
 ]
 
 s_pool = [
@@ -600,7 +599,7 @@ async def main():
     args = parser.parse_args()
     if args.debug:
         logging.getLogger("emd").setLevel(logging.DEBUG)
-    logging.info("*** xiaoya_emd version 1.6.13 ***")
+    logging.info("*** xiaoya_emd version 1.6.14 ***")
     paths = []
     if args.all:
         paths = s_paths_all
