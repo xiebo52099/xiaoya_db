@@ -15,6 +15,13 @@ jobs:
       # 1️⃣ 检出代码
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # 确保完整代码
+
+      # 新增：获取 commit hash
+      - name: Get commit hash
+        id: vars
+        run: echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       # 2️⃣ 设置 QEMU（多架构支持）
       - name: Set up QEMU
@@ -45,8 +52,10 @@ jobs:
           tags: |
             yijiu1919/xiaoya-emd:latest
             yijiu1919/xiaoya-emd:${{ github.run_number }}
+            yijiu1919/xiaoya-emd:${{ env.COMMIT_HASH }}   # 新增 commit hash tag
           build-args: |
             BRANCH=main
+          no-cache: true   # 禁用缓存，确保每次修改生效
 
       # 6️⃣ 输出成功提示
       - name: Done
