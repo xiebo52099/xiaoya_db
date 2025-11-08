@@ -58,25 +58,16 @@ s_paths = [
 ]
 
 s_pool = [
-    "https://emby.xiaoya.pro/",
-    "https://icyou.eu.org/",
-    "https://emby.8.net.co/",
-    "https://emby.raydoom.tk/",
-    "https://embyxiaoya.laogl.top/",
-    "https://emby-data.poxi1221.eu.org/",
-    "https://emby-data.bdbd.fun/",
-    "https://emby-data.ymschh.top/",
-    "https://emby-data.r2s.site/",
-    "https://emby-data.neversay.eu.org/",
-    "https://emby-data.800686.xyz/",
-    "https://emby-data.xn--yetq23gxma.org/",
-    "https://emby-data.younv.at/",
-    "https://emby.kaiserver.uk/",
-    "https://emby-data.ermaokj.cn/",
-    "https://emby-data.wwwh.eu.org/",
-    "https://emby-data.f1rst.top/",
-    "https://emby-data.wx1.dpdns.org/",
-    "https://emby-data.xnn.ee/",
+"https://emby.xiaoya.pro/",
+"https://emby-data.ymschh.top/",
+"https://emby-data.wx1.dpdns.org/",
+"https://emby.kaiserver.uk/",
+"https://emby-xiaoya.laogl.top/",
+"https://emby.raydoom.tk/",
+"https://emby.8.net.co/",
+"https://icyou.eu.org/",
+"https://emby-data.小萝莉.org/",
+"https://emby-data.younv.at/",    
 ]
 
 s_folder = [".sync"]
